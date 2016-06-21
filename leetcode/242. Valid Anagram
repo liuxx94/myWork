@@ -1,0 +1,42 @@
+Given two strings s and t, write a function to determine if t is an anagram of s.
+
+For example,
+s = "anagram", t = "nagaram", return true.
+s = "rat", t = "car", return false.
+
+Note:
+You may assume the string contains only lowercase alphabets.
+
+
+===========================solution================================
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        //用arr1 arr2数组存放每个字符串对应字符出现的个数 如果个数相等 返回true
+        int arr1[26], arr2[26];
+        int len1 = s.length();
+        int len2 = t.length();
+        if(len1 != len2)
+            return false;
+        else if(len1 == len2 == 0)
+            return true;
+        else{
+            //数组清零
+            for(int j = 0; j < 26; j ++){
+                arr1[j] = 0;
+                arr2[j] = 0;
+            }
+            for(int i = 0; i < len1; i ++){
+                arr1[s[i]-'0'-49] ++;
+                arr2[t[i]-'0'-49] ++;
+            }
+            for(int j = 0; j < 26; j ++){
+                if(arr1[j] != arr2[j])
+                    return false;
+            }
+            return true;
+            
+                
+        }
+    }
+};
