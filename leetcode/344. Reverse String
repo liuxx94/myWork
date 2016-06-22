@@ -1,0 +1,24 @@
+Write a function that takes a string as input and returns the string reversed.
+
+Example:
+Given s = "hello", return "olleh".
+
+==================solution=======================
+
+class Solution {
+public:
+    string reverseString(string s) {
+        stack<char> _stack;
+        string result = "";
+        int i = 0;
+        while(s[i] != '\0'){
+            _stack.push(s[i]);
+            i ++;
+        }
+        while(!_stack.empty()){
+            result += _stack.top();
+            _stack.pop();
+        }
+        return result;
+    }
+};
