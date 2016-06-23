@@ -1,0 +1,60 @@
+Given a pattern and a string str, find if str follows the same pattern.
+
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
+
+Examples:
+pattern = "abba", str = "dog cat cat dog" should return true.
+pattern = "abba", str = "dog cat cat fish" should return false.
+pattern = "aaaa", str = "dog cat cat dog" should return false.
+pattern = "abba", str = "dog dog dog dog" should return false.
+Notes:
+You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
+
+===================solution==========================
+
+class Solution {
+public:
+    bool wordPattern(string pattern, string str) {
+ 
+        string H[10005], word[10005];
+        set<char> pat_set;
+        set<string> str_set;
+        char _str[10005];
+        strcpy(_str, str.c_str());
+        int i, j, index = 0, index_word = 0;
+        for(i = 0, j = 0; i < str.length(); i ++)
+        {
+            if(str[i] == ' ')
+            {
+                string temp(_str + j, i - j);
+                word[index_word ++] = temp;
+                j = i + 1;
+            }
+        }
+        string temp(_str + j, i - j);
+        word[index_word ++] = temp;
+        word[index_word] = '\0';
+        
+        int len = pattern.length();
+        for(i = 0; i < len; i ++)
+            pat_set.insert(pattern[i]);
+        for(i = 0; i < index_word; i ++)
+            str_set.insert(word[i]);
+        if(pat_set.size() != str_set.size())
+            return false;
+        else{
+            if(len != index_word)
+                return false;
+            for(i = 0; i < index_word; i ++){
+                if(H[pattern[i]-'0'-49] == "")
+                   H[pattern[i]-'0'-49] = word[i];
+                else if(H[pattern[i]-'0'-49] != word[i])
+                    return false;
+                else
+                    continue;
+            }
+            return true;
+        }
+        
+    }
+};
