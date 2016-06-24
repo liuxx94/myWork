@@ -1,0 +1,36 @@
+Related to question Excel Sheet Column Title
+
+Given a column title as appear in an Excel sheet, return its corresponding column number.
+
+For example:
+
+    A -> 1
+    B -> 2
+    C -> 3
+    ...
+    Z -> 26
+    AA -> 27
+    AB -> 28 
+
+=================solution=======================
+
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int i = 0, len = s.length();
+        int result = 0;
+        while(s[i] != '\0'){
+            if(s[i] >= 'A' && s[i] <= 'Z'){
+                result = result * 26 + s[i] - 'A' + 1;
+                i ++;
+            }
+            else if(s[i] >= 'a' && s[i] <= 'z'){
+                result = result * 26 + s[i] - 'a' + 1;
+                i ++;
+            }
+            else
+                return 0;
+        }
+        return result;
+    }
+};
