@@ -1,0 +1,26 @@
+Given an array of integers, find if the array contains any duplicates.
+
+Your function should return true if any value appears at least twice in the array, 
+and it should return false if every element is distinct.
+
+================solution======================
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        map<int, int> group;
+        bool flag = false;
+        vector<int>::iterator it;
+        for(it = nums.begin(); it != nums.end(); it ++){
+            if(group.find(*it) != group.end()){
+                flag = true;
+                break;
+            }
+            else{
+                group.insert(pair<int, int>(*it, 1));
+                continue;
+            }
+        }
+        return flag;
+    }
+};
