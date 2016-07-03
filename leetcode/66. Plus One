@@ -1,0 +1,34 @@
+Given a non-negative number represented as an array of digits, plus one to the number.
+
+The digits are stored such that the most significant digit is at the head of the list.
+
+
+================solution=========================
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int sz = digits.size();
+        bool flag = false;
+        for(int i = sz - 1; i >= 0; i --){
+            if(digits[i] < 9){
+                digits[i] += 1;
+                break;
+            }
+            else if(i != 0 && digits[i] == 9){
+                digits[i] = 0;
+            }
+            else{
+                flag = true;
+                digits[i] = 0;
+            }
+        }
+        if(flag == false)
+            return digits;
+        else{
+            vector<int>::iterator it = digits.begin();
+            digits.insert(it, 1);
+            return digits;
+        }
+    }
+};
