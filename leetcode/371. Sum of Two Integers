@@ -1,0 +1,21 @@
+Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -.
+
+Example:
+Given a = 1 and b = 2, return 3.
+
+==============solution================
+
+class Solution {
+public:
+    int getSum(int a, int b) {
+        if(a == 0)
+            return b;
+        else if(b == 0)
+            return a;
+        else{
+            int sum = a ^ b; //非1 1相加 没有进位 sum相当于做异或操作
+            int carry = (a & b) << 1;// 1 1 相加 有进位carry
+            return getSum(sum, carry);
+        }
+    }
+};
