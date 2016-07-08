@@ -1,0 +1,102 @@
+
+Your task is to calculate ab mod 1337 where a is a positive integer and b is an extremely large positive integer given in the form of an array.
+
+Example1:
+
+a = 2
+b = [3]
+
+Result: 8
+Example2:
+
+a = 2
+b = [1,0]
+
+Result: 1024
+
+
+=======================solution=============================
+
+java:
+
+public class Solution {
+    public double Pow(double num, int index) {
+        double result = 1;
+        if(index < 5){
+            return Math.pow(num, index)%1337;
+        }
+        else if(index == 5){
+            double temp_5 = 1;//存的是Math.pow(result, 5)
+            for(int j = 0; j < 2; j ++){
+                temp_5 *= Math.pow(num, 2)%1337;
+                temp_5 %= 1337;
+            }
+            temp_5 *= num;
+            temp_5 %= 1337;
+            result = temp_5;
+        }
+        else if(index == 6){
+            double temp_6 = 1;//存的是Math.pow(result, 6)
+            for(int j = 0; j < 3; j ++){
+                temp_6 *= Math.pow(num, 2)%1337;
+                temp_6 %= 1337;
+            }
+            result = temp_6;
+        }
+        else if(index == 7){
+            double temp_7 = 1;//存的是Math.pow(result, 7)
+            for(int j = 0; j < 3; j ++){
+                temp_7 *= Math.pow(num, 2)%1337;
+                temp_7 %= 1337;
+            }
+            temp_7 *= num;
+            temp_7 %= 1337;
+            result = temp_7;
+        }
+        else if(index == 8){
+            double temp_8 = 1;//存的是Math.pow(result, 8)
+            for(int j = 0; j < 4; j ++){
+                temp_8 *= Math.pow(num, 2)%1337;
+                temp_8 %= 1337;
+            }
+            result = temp_8;
+        }
+        else if(index == 9){
+            double temp_9 = 1;//存的是Math.pow(result, 9)
+            for(int j = 0; j < 4; j ++){
+                temp_9 *= Math.pow(num, 2)%1337;
+                temp_9 %= 1337;
+            }
+            temp_9 *= num;
+            temp_9 %= 1337;
+            result = temp_9;
+        }
+        else if(index == 10){
+            double temp_10 = 1;//存的是Math.pow(result, 9)
+            for(int j = 0; j < 5; j ++){
+                temp_10 *= Math.pow(num, 2)%1337;
+                temp_10 %= 1337;
+            }
+            result = temp_10;
+        }
+        return result;
+    }
+    public int superPow(int a, int[] b) {
+        int digits = b.length;
+        int i = 1;
+        int index = a%1337;
+        double result = Pow(index, b[0]);
+        //System.out.println(result);
+        while(i < digits){
+            
+            result = Pow(result, 10);
+            //System.out.println(result);
+            if(b[i] != 0) {
+                result *= Pow(index, b[i]);
+                result %= 1337;
+            }
+            i ++;   
+        }
+        return (int)result;
+    }
+}
