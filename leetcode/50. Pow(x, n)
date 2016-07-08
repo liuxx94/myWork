@@ -1,0 +1,32 @@
+
+Implement pow(x, n).
+将n转成2进制 比如10转成2进制为1010，则3的10次方就是9x(81)^2
+
+==========solution===========
+
+java：
+
+public class Solution {
+    public double myPow(double x, int n) {
+        if(n == 0)
+            return 1.0;
+        else if(n == 1)
+            return x;
+        else if(n == -1)
+            return 1.0/x;
+        double temp = x;
+        String index = Integer.toBinaryString(Math.abs(n));
+        int i = 0, len = index.length();
+        double result = 1;
+        for(i = len - 1; i >= 0; i --){
+            if(index.charAt(i) == '1'){
+                result *= temp;
+            }
+            temp = Math.pow(temp, 2);
+        }
+        if(n > 0)
+            return result;
+        else
+            return 1.0/result;
+    }
+}
