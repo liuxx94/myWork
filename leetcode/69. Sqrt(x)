@@ -1,0 +1,37 @@
+Implement int sqrt(int x).
+
+Compute and return the square root of x.
+
+
+======================solution======================
+
+java£º
+
+public class Solution {
+    public int findMySqrt(int start, int end, int x) {
+        
+        long mid = start + (end-start)/2;
+        if((long)Math.pow(mid, 2) == (long)x)
+            return (int)mid;
+        else if((long)Math.pow(mid, 2) > (long)x){
+            if(mid - (long)start <= 1)
+                return (int)mid-1;
+            else
+                return findMySqrt(start, (int)mid, x);
+        }
+        else{
+            if((long)end - mid <= 1)
+                return (int)mid;
+            else
+                return findMySqrt((int)mid, end, x);
+        }
+            
+    }
+    public int mySqrt(int x) {
+        if(x == 1 || x == 0)
+            return x;
+        return findMySqrt(1, x, x);
+        
+    }
+    
+}
