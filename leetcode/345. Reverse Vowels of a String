@@ -1,0 +1,40 @@
+
+Write a function that takes a string as input and reverse only the vowels of a string.
+
+Example 1:
+Given s = "hello", return "holle".
+
+Example 2:
+Given s = "leetcode", return "leotcede".
+
+================SOLUTION==================
+
+public class Solution {
+    public String reverseVowels(String s) {
+        if(s == null)
+            return s;
+        int len = s.length();
+        int start = 0, end = len - 1;
+        int remark = 0;
+        StringBuffer buf = new StringBuffer(s);
+        
+        for(int i = start; i <= end; i ++){
+            char temp_l = buf.charAt(i);
+            if(temp_l == 'a' || temp_l == 'e' || temp_l == 'i'|| temp_l == 'o'|| temp_l == 'u'
+            || temp_l == 'A' || temp_l == 'E' || temp_l == 'I'|| temp_l == 'O'|| temp_l == 'U'){
+                start = i + 1;
+                for(int j = end; j >= start; j --){
+                    char temp_r = buf.charAt(j);
+                    if(temp_r == 'a' || temp_r == 'e' || temp_r == 'i'|| temp_r == 'o'|| temp_r == 'u'
+                    || temp_r == 'A' || temp_r == 'E' || temp_r == 'I'|| temp_r == 'O'|| temp_r == 'U'){//½»»»i¡¢jÎ»ÖÃµÄ×Ö·û
+                        end = j - 1;
+                        buf.setCharAt(i, temp_r);
+                        buf.setCharAt(j, temp_l);
+                        break;
+                    }
+                }
+            }
+        }
+        return buf.toString();
+    }
+}
