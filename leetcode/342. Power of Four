@@ -1,0 +1,36 @@
+Given an integer (signed 32 bits), write a function to check whether it is a power of 4.
+
+Example:
+Given num = 16, return true. Given num = 5, return false.
+
+Follow up: Could you solve it without loops/recursion?
+
+
+==================solution===================
+java£º
+
+public class Solution {
+    public boolean isPowerOfFour(int num) {
+        if(num <= 0)
+            return false;
+        if(num == 1)
+            return true;
+        int temp = num & (num - 1);
+        if(temp == 0){
+            //ÏÈÅÐ¶ÏÊÇ2µÄÃÝ
+            int count = 1;
+            num = num >> 1;
+            while(num != 1){
+                num = num >> 1;
+                count ++;
+            }
+            if(count % 2 == 0)
+                return true;
+            else
+                return false;
+        }
+        else{
+            return false;
+        }
+    }
+}
