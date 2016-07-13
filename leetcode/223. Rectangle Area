@@ -1,0 +1,89 @@
+
+Find the total area covered by two rectilinear rectangles in a 2D plane.
+
+Assume that the total area is never beyond the maximum possible value of int.
+
+先定好AC的矩形，分情况：
+1 矩形EG的上边长在AC里，下边长在AC外
+	对矩形EG的左右边宽分情况，类似于上下边长的情况区分
+2 矩形EG的上 下边长在AC里
+3 矩形EG的下边长在AC里，上边长在AC外
+4 矩形EG的下边长在AC外下方，上边长在AC外上方
+5 矩形EG的上下边长在AC外同一边
+==========solution================
+
+java：
+
+public class Solution {
+    public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        
+        if(C < A || H < F || D < B || G < E)
+            return 0;
+        int areaAC = 0, areaEG = 0, area_cover = 0;
+        areaAC = (C - A) * (D - B);
+        areaEG = (G - E) * (H - F);
+        int result = 0;
+        if(C >= E && H >= B && H <= D && B >= F){
+            if(G >= C && E >= A && E <= C)
+                area_cover = (C - E) * (H - B);
+            else if(G <= C && E >= A)
+                area_cover = (G - E) * (H - B);
+            else if(G <= C && G >= A && E <= A)
+                area_cover = (G - A) * (H - B);
+            else if(E < A && G > C)
+                area_cover = (C - A) * (H - B);
+            else
+                area_cover = 0;
+            result = areaAC + areaEG - area_cover;
+            return result;
+        }
+        else if(F >= B && H <= D){
+            if(G >= C && E >= A && E <= C)
+                area_cover = (C - E) * (H - F);
+            else if(G <= C && E >= A)
+                area_cover = (G - E) * (H - F);
+            else if(G <= C && G >= A && E <= A)
+                area_cover = (G - A) * (H - F);
+            else if(E < A && G > C)
+                area_cover = (C - A) * (H - F);
+            else
+                area_cover = 0;
+            result = areaAC + areaEG - area_cover;
+            return result;
+        }
+        else if(F >= B && F <= D && H >= D){
+            if(G >= C && E >= A && E <= C)
+                area_cover = (C - E) * (D - F);
+            else if(G <= C && E >= A)
+                area_cover = (G - E) * (D - F);
+            else if(G <= C && G >= A && E <= A)
+                area_cover = (G - A) * (D - F);
+            else if(E < A && G > C)
+                area_cover = (C - A) * (D - F);
+            else
+                area_cover = 0;
+            result = areaAC + areaEG - area_cover;
+            return result;
+        }
+        else if(F <= B && H >= D){
+            if(G >= C && E >= A && E <= C)
+                area_cover = (C - E) * (D - B);
+            else if(G <= C && E >= A)
+                area_cover = (G - E) * (D - B);
+            else if(G <= C && G >= A && E <= A)
+                area_cover = (G - A) * (D - B);
+            else if(E < A && G > C)
+                area_cover = (C - A) * (D - B);
+            else
+                area_cover = 0;
+            result = areaAC + areaEG - area_cover;
+            return result;
+        }
+        else{
+            area_cover = 0;
+            result = areaAC + areaEG - area_cover;
+            return result;
+        }
+        
+    }
+}
