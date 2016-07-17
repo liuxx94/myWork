@@ -12,6 +12,7 @@ You may assume pattern contains only lowercase letters, and str contains lowerca
 
 ===================solution==========================
 
+c++£º
 class Solution {
 public:
     bool wordPattern(string pattern, string str) {
@@ -58,3 +59,47 @@ public:
         
     }
 };
+
+
+java£º
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        String word[] = str.split(" ");
+        int len = pattern.length();
+        int sz = word.length;
+        
+        String[] H = new String[26];
+    
+        Set pat_kind = new HashSet();
+        for(int j = 0; j < len; j ++)
+            pat_kind.add(pattern.charAt(j));
+        Set str_kind = new HashSet();
+        for(int j = 0; j < sz; j ++)
+            str_kind.add(word[j]);
+        if(str_kind.size() != pat_kind.size())
+            return false;
+        if(len != sz)
+            return false;
+        else{
+            for(int i = 0; i < 26; i ++){
+                H[i] = "";
+            }
+            for(int j = 0; j < len; j ++){
+                if(H[pattern.charAt(j) - 'a'].equals("")){
+                    H[pattern.charAt(j) - 'a'] = word[j];
+                    
+                }
+                else{
+                    if(H[pattern.charAt(j) - 'a'].equals(word[j]))
+                        continue;
+                    else{
+                        
+                        return false;
+                    }
+                        
+                }
+            }
+            return true;
+        }
+    }
+}
